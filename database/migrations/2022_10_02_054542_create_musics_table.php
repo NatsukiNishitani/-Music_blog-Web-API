@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('song_title', 50);
             $table->string('singer', 50);
+            $table->timestamps();
         });
     }
 
