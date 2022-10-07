@@ -18,7 +18,8 @@
                         <h2 class='singer'>歌手(singer)</h2>
                             <input type="text" name="music[singer]" placeholder="singers"/>
                             <p class="singer_error" style="color:red">{{ $errors->first('music.singer') }}</p>
-                        <p class='hashtags'>#ハッシュタグ(tag)</p>                                                                                                                                                                                              
+                        <P class='hashtags'>#ハッシュタグ(tag)</p>  
+                        <input type="text" name="hashtag[name]" placeholder="hashtags"/>
                 </div>
                 <input type="submit" value="登録(store)"/>
             </form>

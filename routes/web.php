@@ -14,7 +14,8 @@ use App\Http\Controllers\PostController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/search', [MusicContoller::class, 'search']);   //今日検索画面
+
+Route::post('/search', [MusicContoller::class, 'search']);   //今日検索画面
 Route::get('/musics', [MusicController::class, 'index']);   //曲検索結果表示
 Route::get('/musics/create', [MusicController::class, 'create']);   //新規曲登録入力画面
 Route::post('/musics', [MusicController::class, 'store']);      //新規曲登録保存
