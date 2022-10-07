@@ -20,4 +20,9 @@ class Music extends Model
         'song_title',
         'singer',
     ];
+    
+    public function tags()
+    {
+        return $this->belongsToMany('App\Models\Tag');
+    }
 }
