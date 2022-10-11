@@ -25,4 +25,8 @@ class Music extends Model
     {
         return $this->belongsToMany('App\Models\Tag');
     }
+    
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
 }
