@@ -13,12 +13,12 @@
         <h2 class="song">曲名 (song) : {{ $music->song_title }}</h2>
         </div>
         <div class='singer'>
-        <h3>歌手 (singer) : {{ $music->singer}} </h3>
+        <h3>歌手 (singer) : {{ $music->singer }} </h3>
         </div>
         <a href='/posts/create'>レビュー投稿 (Review)</a>
         <div class='posts'>
             <h2>レビュー (Review)</h2>
-            @foreach ($music->reviews as $post)
+            @foreach ($posts as $post)
                 <div class='post'>
                     <p class='review'>{{ $post->review }}</p>
                     <a href='/posts/create'>レビュー投稿 (Review)</a>
