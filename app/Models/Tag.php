@@ -18,7 +18,7 @@ class Tag extends Model
     
     public function musics()
     {
-        return $this->belongsToMany('App\Models\Music');
+        return $this->belongsToMany(Music::class);
 
     }
 }

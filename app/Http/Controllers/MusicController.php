@@ -16,7 +16,7 @@ class MusicController extends Controller
     
     public function store(Request $request, Music $music)
     {
-        
+        //dd(Music::find(1));
         
         //＄変数の格納
         $input_hashtag = $request['hashtag'];
@@ -46,30 +46,27 @@ class MusicController extends Controller
         
     }
     
-    public function show(Music $music){
-        return view('musics/show')->with(['music' => $music->load("reviews")]);
+    public function show(Music $music, Post $post){
+        return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5)]);
+        
     }
     
-    public function search(){
-        //ハッシュタグ複数登録
-        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request["hashtag"]["name"], $match);
-        $tag = Tag::where('name', $match[1][0])->first();
-        dd($tag->musics);
+    public function search(Request $request){
         
-        foreach($match[1] as $input)
-        {
-        
-            //すでにデータがあれば取得し、なければデータを作成する
-            $tag=Tag::firstOrCreate(['name'=>$input]);
-            //tagを初期化（$tagに配列でデータが入ってしまうため）
-            $tag=null;
-            //入力されたタグのidを取得
-            $tag_id=Tag::where('name', $input)->get(['id']);
-            //タグとmusicの紐づけ
-            $music=Music::find($music_id);
-            $music->tags()->attach($tag_id);
-            
+        $search=$request->input("search");
+        if($search){
+            $results=Music::whereIn("tag_id", function($query) use($request){
+            $query->from("tags")
+            ->select("name")
+            ->where("name", $request->input("search"));
+        })->get();
+        return view("musics/search")->with(["results"=>$results]);
+    
+        dd($results);
         }
+        
+        return view("musics/search");
+        
         
     }
     
