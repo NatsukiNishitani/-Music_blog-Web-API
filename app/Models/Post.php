@@ -4,12 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Post;
 use App\Models\Reviews;
+
 
 class Post extends Model
 {
     use HasFactory;
+    
+    
+    protected $fillable = [
+      'review',
+      'music_id',
+      'user_id'
+    ];
     
     public function getByLimit(int $limit_count = 10)
     {

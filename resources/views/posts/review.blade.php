@@ -6,7 +6,7 @@
     </head>
     <body>
         <h1>Blog Name</h1>
-        <form action="/posts" method="POST">
+        <form action="/musics/{{ $music->id }}" method="POST">
             @csrf
             <div class="review">
                 <h2>感想 Review</h2>

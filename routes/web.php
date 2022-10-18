@@ -15,16 +15,17 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/search', [MusicController::class, 'search']);   //今日検索画面
-Route::get('/musics', [MusicController::class, 'index']);   //曲検索結果表示
+Route::get('/search', [MusicController::class, 'search']);   //曲検索画面、検索結果表示
+//Route::get('/musics', [MusicController::class, 'index']);   //曲検索結果表示
 Route::get('/musics/create', [MusicController::class, 'create']);   //新規曲登録入力画面
 Route::post('/musics', [MusicController::class, 'store']);      //新規曲登録保存
-Route::get('/musics/{music}/create', [PostController::class, 'create']);   //曲レビュー投稿ページ
-//Route::get('/musics/{music}/')
+Route::get('/musics/{music}/review', [PostController::class, 'review']);   //曲レビュー投稿ページ,いいね機能、五段階評価
+Route::get('/musics/{music}/edit', [PostController::class, 'edit']);
 Route::put('/musics/{music}', [PostController::class, 'update']);      //曲レビュー編集更新ページ
-Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧ページ
+Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧,いいね機能、五段階評価記載されてる
 Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集アップデート
-Route::get('/posts');
+Route::get('/musics/{music}/{post}', [PostController::class, 'reply']);  //show.bladeに対して返信機能
+Route::delete('musics/{music}/{post}', [PostController::class. 'delete']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
