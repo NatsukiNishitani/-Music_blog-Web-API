@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Music;
 
 class PostController extends Controller
 {
@@ -12,17 +13,36 @@ class PostController extends Controller
         return view('posts/show')->with(['posts' => $post->getPaginateByLimit()]);
     }
     
-    public function create()
+    public function review(Music $music)
     {
-        return view('posts/create');
+        return view('posts/review')->with(['music' => $music]);
     }
     
-    public function store()
+    
+    public function store(Request $request, Music $music)
     {
         
-        dd($request);
+        $post = new Post;
+        //dd($request);
         $input = $request['post'];
+        $input += ['music_id' => $music->id];
+        $input += ['user_id' => $request->user()->id
+];
         $post->fill($input)->save();
-        return redirect('/posts/'.$music->id);
+        return redirect('/musics/'.$music->id);
+    }
+    
+    public function edit()
+    {
+        
+    }
+    
+    public function reply(){
+        
+    }
+    
+    public function delete(Post $post, Music $music){
+        $post->delete();
+        return redirect('/musics/'.$music->id);
     }
 }

@@ -18,7 +18,7 @@
         </div>
         
         <div class='result'>
-            @foreach($rsults as $result)
+            @foreach($results as $result)
             <h2>{{ $result->song_title }}</h2>
             <p>{{ $result->singer }}</p>
             @endforeach
