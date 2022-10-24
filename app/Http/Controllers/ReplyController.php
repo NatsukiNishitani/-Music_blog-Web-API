@@ -11,7 +11,7 @@ use App\Models\Review;
 class ReplyController extends Controller
 {
     public function reply(Music $music, Post $post, Reply $reply){
-        return view('posts/reply')->with(['music' => $music,'post' => $post, 'reply' => $reply]);
+        return view('posts/reply')->with(['music' => $music,'post' => $post, 'replies' => $reply->get()]);
     }
     
     public function store(Request $request,Music $music,Post $post)
@@ -19,10 +19,8 @@ class ReplyController extends Controller
         
         $reply = new Reply;
         $input = $request['reply'];
-        $input += ['user_id' => $request->user()->id];
-        $input += ['post_id' => $post];
         $reply->fill($input)->save();
-        return redirect('/musics/'.$music.'/'.$post);
+        return redirect('/musics/'.$music->id.'/'.$post->id);
     }
     
     
