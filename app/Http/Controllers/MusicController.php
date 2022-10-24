@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Music;
 use App\Models\Post;
+use App\Models\Reply;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+
+
 
 class MusicController extends Controller
 {
@@ -14,16 +17,15 @@ class MusicController extends Controller
         return view('musics/create')->with(['musics' => $music->get()]);
     }
     
+    
+    
     public function store(Request $request, Music $music)
     {
-        //dd(Music::find(1));
-        
         //＄変数の格納
         $input_hashtag = $request['hashtag'];
+        //曲の保存
         $input_music = $request['music'];
-         //曲の保存
         $music->fill($input_music)->save();
-        
         //ハッシュタグ複数登録
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $input_hashtag["name"], $match);
         foreach($match[1] as $input){
@@ -41,18 +43,15 @@ class MusicController extends Controller
         
     }
     
-    public function index(Music $music,Post $post){
-        return view('musics/index')->with(['musics' => $music ->get(), 'posts' => $post->get()]);
+    
+    public function show(Music $music, Post $post, Reply $reply){
+        return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5),'reply' => $reply]);
         
     }
     
-    public function show(Music $music, Post $post){
-        return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5)]);
-        
-    }
+    
     
     public function search(Request $request){
-        
         $search=$request->input("search");
         if($search){
             $results=Music::whereIn("tag_id", function($query) use($request){
@@ -61,12 +60,9 @@ class MusicController extends Controller
             ->where("name", $request->input("search"));
         })->get();
         return view("musics/search")->with(["results"=>$results]);
-    
-        dd($results);
         }
         
         return view("musics/search");
-        
         
     }
     

@@ -22,7 +22,8 @@
                 <div class='post'>
                     <p class='review'>{{ $post->review }}</p>
                     @if(auth()->id() == $post->user_id)
-                    <form action="musics/{{ $music->id }}/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                    <p class="edit">[<a href="/musics/{{ $post->id }}/edit">編集 (edit)</a>]</p>
+                    <form action="/musics/{{ $post->id }}/{{ $reply->id }}" id="form_{{ $post->id }}" method="post">
                         @csrf
                         @method('DELETE')
                         <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
