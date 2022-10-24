@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->string('reply', 200);
+            $table->string('comment', 200);
             $table->foreignId('post_id')->constrained("posts"); 
             $table->foreignId('user_id')->constrained("users"); 
             $table->timestamps();

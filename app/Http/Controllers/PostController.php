@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Music;
+use App\Models\Reply;
 
 class PostController extends Controller
 {
@@ -23,11 +24,9 @@ class PostController extends Controller
     {
         
         $post = new Post;
-        //dd($request);
         $input = $request['post'];
         $input += ['music_id' => $music->id];
-        $input += ['user_id' => $request->user()->id
-];
+        $input += ['user_id' => $request->user()->id];
         $post->fill($input)->save();
         return redirect('/musics/'.$music->id);
     }
@@ -37,9 +36,8 @@ class PostController extends Controller
         
     }
     
-    public function reply(){
-        
-    }
+   
+    
     
     public function delete(Post $post, Music $music){
         $post->delete();
