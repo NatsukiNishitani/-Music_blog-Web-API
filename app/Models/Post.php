@@ -20,7 +20,10 @@ class Post extends Model
       'user_id'
     ];
     
-    
+    public function users()
+    {
+        return this->belongsTo(User::class);
+    }
     
     public function getByLimit(int $limit_count = 10)
     {

@@ -21,6 +21,7 @@
             @foreach ($posts as $post)
                 <div class='post'>
                     <p class='review'>{{ $post->review }}</p>
+                    <a href='/musics/{{ $music->id }}/{{ $post->id }}'>返信 (Reply)</a>
                     @if(auth()->id() == $post->user_id)
                     <p class="edit">[<a href="/musics/{{ $post->id }}/edit">編集 (edit)</a>]</p>
                     <form action="/musics/{{ $post->id }}/{{ $reply->id }}" id="form_{{ $post->id }}" method="post">
@@ -29,7 +30,6 @@
                         <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
                     </form>
                     @endif
-                    <a href='/musics/{{ $music->id }}/{{ $post->id }}'>返信 (Reply)</a>
                 </div>
             @endforeach
         </div>
