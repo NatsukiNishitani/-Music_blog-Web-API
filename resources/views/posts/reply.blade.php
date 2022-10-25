@@ -5,7 +5,7 @@
         <title>Blog</title>
     </head>
     <body>
-        <h1>〇〇さんコメント</h1>
+        <h1>{{ Auth::user()->name }}さんコメント</h1>
         <p class="post">{{ $post->review }}</p>
         <form action="/musics/{{ $music->id }}/{{ $post->id}}" method="POST">
             @csrf
