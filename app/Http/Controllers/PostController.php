@@ -14,10 +14,13 @@ class PostController extends Controller
         return view('posts/show')->with(['posts' => $post->getPaginateByLimit()]);
     }
     
+    
+    
     public function review(Music $music)
     {
         return view('posts/review')->with(['music' => $music]);
     }
+    
     
     
     public function store(Request $request, Music $music)
@@ -31,12 +34,23 @@ class PostController extends Controller
         return redirect('/musics/'.$music->id);
     }
     
-    public function edit()
+    
+    
+    public function edit(Post $post, Music $music)
     {
-        
+        return view('posts/edit')->with(['post' => $post, 'music'=> $music]);
     }
     
-   
+    
+    
+    public function update(PostRequest $request, Post $post, Music $music)
+    {
+        $input_post = $request['post'];
+        $post->fill($input_post)->save();
+        
+        return redirect('/musics/' . $music->id);
+    }
+    
     
     
     public function delete(Post $post, Music $music){
