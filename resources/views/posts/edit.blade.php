@@ -14,7 +14,7 @@
                <h2>感想 Review</h2>
                <textarea name="post[review]" placeholder="曲の感想・評価・詳細情報"></textarea>
            </div>
-           <input typ="submit" value="store"/>
+           <input type="submit" value="保存 (store)"/>
        </form>
        <div class="footer">
            <a href="/musics/{{ $music->id }}">戻る (back)</a>

@@ -22,7 +22,7 @@ class Post extends Model
     
     public function users()
     {
-        return this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
     
     public function getByLimit(int $limit_count = 10)
@@ -35,6 +35,5 @@ class Post extends Model
         return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
     }
     
-    
-    
+   
 }

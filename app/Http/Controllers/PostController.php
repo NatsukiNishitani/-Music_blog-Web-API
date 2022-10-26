@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Music;
 use App\Models\Reply;
@@ -43,12 +44,12 @@ class PostController extends Controller
     
     
     
-    public function update(PostRequest $request, Post $post, Music $music)
+    public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
         $post->fill($input_post)->save();
         
-        return redirect('/musics/' . $music->id);
+        return redirect('/musics/' . $post->music_id);
     }
     
     

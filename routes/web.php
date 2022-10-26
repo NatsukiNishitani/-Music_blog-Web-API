@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,14 @@ Route::get('/musics/create', [MusicController::class, 'create']);   //新規曲�
 Route::post('/musics', [MusicController::class, 'store']);      //新規曲登録保存
 Route::get('/musics/{music}/review', [PostController::class, 'review']);   //曲レビュー投稿ページ,いいね機能、五段階評価
 Route::get('/musics/{music}/edit', [PostController::class, 'edit']);
-Route::put('/musics/{music}', [PostController::class, 'update']);      //曲レビュー編集更新ページ
+Route::put('/musics/{post}', [PostController::class, 'update']);      //曲レビュー編集更新ページ
 Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧,いいね機能、五段階評価記載されてる
 Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集アップデート
 Route::get('/musics/{music}/{post}', [ReplyController::class, 'reply']);  //show.bladeに対して返信機能
-Route::post('musics/{music}/{post}', [ReplyController::class, 'store']);
-Route::delete('musics/{post}/{music}', [PostController::class, 'delete']);
+Route::post('/musics/{music}/{post}', [ReplyController::class, 'store']);
+Route::delete('/musics/{post}/{music}', [PostController::class, 'delete']);
+Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
+Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
 //Route::delete('', [ReplyController::class, 'delete']);
 
 Route::get('/dashboard', function () {

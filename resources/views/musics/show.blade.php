@@ -6,6 +6,7 @@
         <title>Blog</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
         <h1>曲レビュー (Music Review)</h1>
@@ -19,8 +20,24 @@
         <div class='posts'>
             <h2>レビュー (Review)</h2>
             @foreach ($posts as $post)
-                <div class='post'>
-                    <p class='review'>{{ $post->review }}</p>
+                @if($post->users()->where('user_id', Auth::id())->exists())
+                    <div class="col-md-3">
+                        <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
+                             @csrf
+                            <input type="submit" value="&#xf164;いいね取り消す" class="fas btn btn-danger">
+                        </form>
+                     </div>
+                @else
+                    <div class="col-md-3">
+                        <form action="/good/{{ $music->id }}/{{ $post->id }}"  method="POST">
+                        @csrf
+                        <input type="submit" value="&#xf164;いいね" class="fas btn btn-success">
+                      </form>
+                     </div>
+                @endif
+                <div class="row justify-content-center">
+                    <p>いいね数：{{ $post->users()->count() }}</p>
+                </div>
                     <a href='/musics/{{ $music->id }}/{{ $post->id }}'>返信 (Reply)</a>
                     @if(auth()->id() == $post->user_id)
                     <p class="edit">[<a href="/musics/{{ $post->id }}/edit">編集 (edit)</a>]</p>
