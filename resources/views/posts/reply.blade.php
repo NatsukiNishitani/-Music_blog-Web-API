@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
         <title>Blog</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /><meta charset="utf-8">
     </head>
     <body>
         <h1>{{ Auth::user()->name }}さんコメント</h1>
@@ -19,14 +20,33 @@
         </form>
             <div class='reply_detail_index'>
                 @foreach($replies as $reply)
-                <p class='reply'>{{ $reply->comment }}</p>
-                @if(auth()->id() == $reply->user_id)
-                    <form action="/musics/{{ $post->id }}/{{ $music->id }}/{{ $reply->id }}" id="form_{{ $reply->id }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" onclick="deletePost({{ $reply->id }})">delete</button>
-                    </form>
-                @endif
+                <p class='reply'>{{ $reply->comment }}
+                    @if($post->users()->where('user_id', Auth::id())->exists())
+                        <div class="col-md-3">
+                            <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
+                                 @csrf
+                                <input type="submit" value="&#xf164;いいね取り消す" class="fas btn btn-danger">
+                            </form>
+                         </div>
+                    @else
+                        <div class="col-md-3">
+                            <form action="/good/{{ $music->id }}/{{ $post->id }}"  method="POST">
+                            @csrf
+                            <input type="submit" value="&#xf164;いいね" class="fas btn btn-success">
+                          </form>
+                         </div>
+                    @endif
+                    <div class="row justify-content-center">
+                        <p>いいね数：{{ $post->users()->count() }}</p>
+                    </div>
+                    @if(auth()->id() == $reply->user_id)
+                        <form action="/musics/{{ $post->id }}/{{ $music->id }}/{{ $reply->id }}" id="form_{{ $reply->id }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" onclick="deletePost({{ $reply->id }})">delete</button>
+                        </form>
+                    @endif
+                    </p>
                 @endforeach
             </div>
             

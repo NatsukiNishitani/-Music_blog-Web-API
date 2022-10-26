@@ -30,6 +30,8 @@ Route::post('/musics/{music}/{post}', [ReplyController::class, 'store']);
 Route::delete('/musics/{post}/{music}', [PostController::class, 'delete']);
 Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
 Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
+//Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
+//Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
 //Route::delete('', [ReplyController::class, 'delete']);
 
 Route::get('/dashboard', function () {
