@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initisal-scale=1">
-        <title>Blog</title>
+        <title>Music Blog</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,8 +18,10 @@
         </div>
         <a href='/musics/{{ $music->id }}/review'>レビュー投稿 (Review)</a>
         <div class='posts'>
-            <h2>レビュー (Review)</h2>
+            <h2>投稿一覧 (Review)</h2>
             @foreach ($posts as $post)
+            <p class='post_who'>{{ Auth::user()->name }}</p>
+            <p class='post'>{{ $post->review }}</p>
                 @if($post->users()->where('user_id', Auth::id())->exists())
                     <div class="col-md-3">
                         <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
@@ -38,13 +40,13 @@
                 <div class="row justify-content-center">
                     <p>いいね数：{{ $post->users()->count() }}</p>
                 </div>
-                    <a href='/musics/{{ $music->id }}/{{ $post->id }}'>返信 (Reply)</a>
+                    <a href='/musics/{{ $music->id }}/{{ $post->id }}'><i class="fa-regular fa-comment"></i>返信 (Reply)</a>
                     @if(auth()->id() == $post->user_id)
                     <p class="edit">[<a href="/musics/{{ $post->id }}/edit">編集 (edit)</a>]</p>
                     <form action="/musics/{{ $post->id }}/{{ $reply->id }}" id="form_{{ $post->id }}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button type="button" onclick="deletePost({{ $post->id }})">delete</button>
+                        <button type="button" onclick="deletePost({{ $post->id }})">削除 (delete)</button>
                     </form>
                     @endif
                 </div>
