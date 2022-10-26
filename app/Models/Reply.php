@@ -14,4 +14,9 @@ class Reply extends Model
       'post_id',
       'user_id'
     ];
+    
+    public function users()
+    {
+      return $this->belogsToMany(User::class);
+    }
 }
