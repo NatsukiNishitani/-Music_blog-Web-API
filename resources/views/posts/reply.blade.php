@@ -21,23 +21,23 @@
             <div class='reply_detail_index'>
                 @foreach($replies as $reply)
                 <p class='reply'>{{ $reply->comment }}
-                    @if($post->users()->where('user_id', Auth::id())->exists())
+                    @if($reply->users()->where('user_id', Auth::id())->exists())
                         <div class="col-md-3">
-                            <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
+                            <form action="/unlike/{{ $music->id }}/{{ $reply->id }}/" method="POST">
                                  @csrf
                                 <input type="submit" value="&#xf164;いいね取り消す" class="fas btn btn-danger">
                             </form>
                          </div>
                     @else
                         <div class="col-md-3">
-                            <form action="/good/{{ $music->id }}/{{ $post->id }}"  method="POST">
+                            <form action="/like/{{ $music->id }}/{{ $reply->id }}/"  method="POST">
                             @csrf
                             <input type="submit" value="&#xf164;いいね" class="fas btn btn-success">
                           </form>
                          </div>
                     @endif
                     <div class="row justify-content-center">
-                        <p>いいね数：{{ $post->users()->count() }}</p>
+                        <p>いいね数：{{ $reply->users()->count() }}</p>
                     </div>
                     @if(auth()->id() == $reply->user_id)
                         <form action="/musics/{{ $post->id }}/{{ $music->id }}/{{ $reply->id }}" id="form_{{ $reply->id }}" method="post">

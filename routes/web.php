@@ -13,7 +13,7 @@ use App\Http\Controllers\FavoriteController;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "web" middleware group. Now create something great!  
 |
 */
 
@@ -30,8 +30,8 @@ Route::post('/musics/{music}/{post}', [ReplyController::class, 'store']);
 Route::delete('/musics/{post}/{music}', [PostController::class, 'delete']);
 Route::post('/good/{music}/{post}', [FavoriteController::class, 'post_store']);
 Route::post('/bad/{music}/{post}', [FavoriteController::class, 'post_destroy']);
-//Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
-//Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
+Route::post('/like/{music}/{reply}/', [FavoriteController::class, 'reply_store']);
+Route::post('/unlike/{music}/{reply}/', [FavoriteController::class, 'reply_destroy']);
 //Route::delete('', [ReplyController::class, 'delete']);
 
 Route::get('/dashboard', function () {

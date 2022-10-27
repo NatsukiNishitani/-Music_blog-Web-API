@@ -17,6 +17,6 @@ class Reply extends Model
     
     public function users()
     {
-      return $this->belogsToMany(User::class);
+      return $this->belongsToMany(User::class);
     }
 }
