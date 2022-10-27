@@ -14,13 +14,20 @@ class ReplyController extends Controller
         return view('posts/reply')->with(['music' => $music,'post' => $post, 'replies' => $reply->get()]);
     }
     
-    public function store(Request $request,Music $music,Post $post)
+    public function pot_store(Request $request,Music $music,Post $post)
     {   
         
         $reply = new Reply;
         $input = $request['reply'];
         $reply->fill($input)->save();
         return redirect('/musics/'.$music->id.'/'.$post->id);
+    }
+    
+    public function post_destroy($music, Post $post)
+    {
+        $post->users()->detach(Auth::id());
+        
+        return redirect('/musics/'. $music);
     }
     
     
