@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\Reply;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+
 
 
 
@@ -54,15 +56,16 @@ class MusicController extends Controller
     public function search(Request $request){
         $search=$request->input("search");
         if($search){
-            $results=Music::whereIn("tag_id", function($query) use($request){
-            $query->from("tags")
-            ->select("name")
-            ->where("name", $request->input("search"));
+            $results=Music::whereHasMorph("id",Tag::class, function(Builder $query){
+            $query->where("name", $search);
         })->get();
         return view("musics/search")->with(["results"=>$results]);
+        } else {
+            $results=Music::all();
+            return view("musics/search")->with(["results"=>$results]);
         }
         
-        return view("musics/search");
+        
         
     }
     

@@ -18,10 +18,15 @@
         </div>
         
         <div class='result'>
+            @if($results)
             @foreach($results as $result)
-            <h2>{{ $result->song_title }}</h2>
-            <p>{{ $result->singer }}</p>
+            <h2>曲：{{ $result->song_title }}</h2>
+            <p>歌手：{{ $result->singer }}</p>
             @endforeach
+            @else
+            <p>曲が見つかりませんでした</p>
+            <a href='/musics/create'>新規曲登録 (create)</a>
+            @endif
         </div>
     </body>
 </html>
