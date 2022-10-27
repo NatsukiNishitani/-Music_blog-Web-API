@@ -28,8 +28,8 @@ Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集�
 Route::get('/musics/{music}/{post}', [ReplyController::class, 'reply']);  //show.bladeに対して返信機能
 Route::post('/musics/{music}/{post}', [ReplyController::class, 'store']);
 Route::delete('/musics/{post}/{music}', [PostController::class, 'delete']);
-Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
-Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
+Route::post('/good/{music}/{post}', [FavoriteController::class, 'post_store']);
+Route::post('/bad/{music}/{post}', [FavoriteController::class, 'post_destroy']);
 //Route::post('/good/{music}/{post}', [FavoriteController::class, 'store']);
 //Route::post('/bad/{music}/{post}', [FavoriteController::class, 'destroy']);
 //Route::delete('', [ReplyController::class, 'delete']);
