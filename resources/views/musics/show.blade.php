@@ -16,6 +16,11 @@
         <div class='singer'>
         <h3>歌手 (singer) : {{ $music->singer }} </h3>
         </div>
+        <div class'tags'>
+            @foreach ($music->tags as $tag)
+            <p>#{{ $tag->name }}</p>
+            @endforeach
+        </div>
         <a href='/musics/{{ $music->id }}/review'>レビュー投稿 (Review)</a>
         <div class='posts'>
             <h2>投稿一覧 (Review)</h2>

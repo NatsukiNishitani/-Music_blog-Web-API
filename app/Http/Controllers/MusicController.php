@@ -54,19 +54,20 @@ class MusicController extends Controller
     
     
     public function search(Request $request){
-        $search=$request->input("search");
-        if($search){
-            $results=Music::whereHasMorph("id",Tag::class, function(Builder $query){
-            $query->where("name", $search);
-        })->get();
-        return view("musics/search")->with(["results"=>$results]);
+        $keyword = $request->input("search");
+        $query = Music::query();
+        
+        if (isset($keyword)) {
+            $musics = Music::whereHas('tags', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%{$keyword}%");
+            })->get();
         } else {
-            $results=Music::all();
-            return view("musics/search")->with(["results"=>$results]);
+            $musics=Music::all();
+        } 
+        if ($musics->isEmpty()) {
+            return redirect('/musics/create');
         }
-        
-        
-        
+        return view('musics/search')->with(['musics' => $musics]);
     }
     
 }
