@@ -18,10 +18,10 @@
         </div>
         
         <div class='result'>
-            @if($results)
-            @foreach($results as $result)
-            <h2>曲：{{ $result->song_title }}</h2>
-            <p>歌手：{{ $result->singer }}</p>
+            @if(isset($musics))
+            @foreach($musics as $music)
+            <a href='/musics/{{ $music->id }}'><h2>曲：{{ $music->song_title }}</h2></a>
+            <p>歌手：{{ $music->singer }}</p>
             @endforeach
             @else
             <p>曲が見つかりませんでした</p>

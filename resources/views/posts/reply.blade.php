@@ -7,20 +7,20 @@
     </head>
     <body>
         <h1>{{ Auth::user()->name }}さんコメント</h1>
-        <p class="post">{{ $post->review }}</p>
-        <form action="/musics/{{ $music->id }}/{{ $post->id}}" method="POST">
+        <p class="main">{{ $main->review }}</p>
+        <form action="/musics/{{ $music->id }}/{{ $main->id}}" method="POST">
             @csrf
             <div class="reply">
                 <h2>コメント Reply</h2>
                 <textarea name="reply[comment]" placeholder="コメント，返事"></textarea>
             </div>
-            <input type="hidden" name="reply[post_id]" value={{ $post->id }} readonly></input>
+            <input type="hidden" name="reply[post_id]" value={{ $main->id }} readonly></input>
             <input type="hidden" name="reply[user_id]" value={{ Auth::user()->id }} readonly></input>
             <input type="submit" value="store"/>
         </form>
             <div class='reply_detail_index'>
                 @foreach($replies as $reply)
-                <p class='reply'>{{ $reply->comment }}
+                <a href="" class='reply'>{{ $reply->comment }}
                     @if($reply->users()->where('user_id', Auth::id())->exists())
                         <div class="col-md-3">
                             <form action="/unlike/{{ $music->id }}/{{ $reply->id }}/" method="POST">

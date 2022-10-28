@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('comment', 200);
             $table->foreignId('post_id')->constrained("posts"); 
             $table->foreignId('user_id')->constrained("users"); 
+            $table->foreignId('reply_id')->constrained("replies")->nullable();
             $table->timestamps();
         });
     }

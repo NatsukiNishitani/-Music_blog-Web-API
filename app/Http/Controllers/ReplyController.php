@@ -11,8 +11,12 @@ use App\Models\Review;
 class ReplyController extends Controller
 {
     public function reply(Music $music, Post $post, Reply $reply){
-        return view('posts/reply')->with(['music' => $music,'post' => $post, 'replies' => $reply->get()]);
+        return view('posts/reply')->with(['music' => $music,'main' => $post, 'replies' => $reply->where('music_id', $music->id)->get()]);
     }
+    
+    public function show_reply(Music $music, Reply $reply){
+        return view('posts/reply')->with(['music' => $music,'main' => $reply, 'replies' => $reply->get()]);
+    }   
     
     public function store(Request $request,Music $music,Post $post)
     {   

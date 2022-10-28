@@ -26,6 +26,7 @@ Route::put('/musics/{post}', [PostController::class, 'update']);      //曲レ�
 Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧,いいね機能、五段階評価記載されてる
 Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集アップデート
 Route::get('/musics/{music}/{post}', [ReplyController::class, 'reply']);  //show.bladeに対して返信機能
+Route::get('/replies/{music}/{reply}', [ReplyController::class, 'show_reply']);
 Route::post('/musics/{music}/{post}', [ReplyController::class, 'store']);
 Route::delete('/musics/{post}/{music}', [PostController::class, 'delete']);
 Route::post('/good/{music}/{post}', [FavoriteController::class, 'post_store']);
