@@ -46,17 +46,38 @@ class MusicController extends Controller
     }
     
     
-    public function show(Music $music, Post $post, Reply $reply){
-        return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5),'reply' => $reply]);
+    public function show(Music $music, Post $post, Reply $reply, Tag $tag){
+        return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5),'reply' => $reply, 'tags' => $tag]);
         
     }
     
     
     
+    /*public function search(Request $request){
+        $keyword = $request->input("search");
+        $query = Music::query();
+        $musics=Music::all();
+
+        if (isset($keyword)) {
+            $musics = Music::whereHas('tags', function ($query) use ($keyword) {
+            $query->where('name', 'LIKE', "%{$keyword}%");
+            })->get();
+            
+        } else {
+            $musics=Music::all();
+        }
+        
+        if (count($musics)==0) {
+            return redirect('/musics/create');
+        }
+        return view('musics/search')->with(['musics' => $musics]);
+    }*/
+    
+    
     public function search(Request $request){
         $keyword = $request->input("search");
         $query = Music::query();
-        
+
         if (isset($keyword)) {
             $musics = Music::whereHas('tags', function ($query) use ($keyword) {
                 $query->where('name', 'LIKE', "%{$keyword}%");
@@ -69,6 +90,5 @@ class MusicController extends Controller
         }
         return view('musics/search')->with(['musics' => $musics]);
     }
-    
 }
 
