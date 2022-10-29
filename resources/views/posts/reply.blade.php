@@ -7,14 +7,14 @@
     </head>
     <body>
         <h1>{{ Auth::user()->name }}さんコメント</h1>
-        <p class="main">{{ $main->review }}</p>
-        <form action="/musics/{{ $music->id }}/{{ $main->id}}" method="POST">
+        <p class="post">{{ $post->review }}</p>
+        <form action="/musics/{{ $music->id }}/{{ $post->id}}" method="POST">
             @csrf
             <div class="reply">
                 <h2>コメント Reply</h2>
                 <textarea name="reply[comment]" placeholder="コメント，返事"></textarea>
             </div>
-            <input type="hidden" name="reply[post_id]" value={{ $main->id }} readonly></input>
+            <input type="hidden" name="reply[post_id]" value={{ $post->id }} readonly></input>
             <input type="hidden" name="reply[user_id]" value={{ Auth::user()->id }} readonly></input>
             <input type="submit" value="store"/>
         </form>

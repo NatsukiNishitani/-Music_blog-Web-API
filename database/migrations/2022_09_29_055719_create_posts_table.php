@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('replies', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('comment', 200);
-            $table->foreignId('post_id')->constrained("posts"); 
+            $table->string('review', 200);
+            $table->foreignId('music_id')->constrained("musics"); 
             $table->foreignId('user_id')->constrained("users"); 
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('replies');
+        Schema::dropIfExists('post');
     }
 };
