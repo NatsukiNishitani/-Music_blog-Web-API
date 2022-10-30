@@ -20,6 +20,12 @@
             @foreach ($music->tags as $tag)
             <p>#{{ $tag->name }}</p>
             @endforeach
+            <form action="/musics" method="POST">
+                <h3 class = "add hashtags">ハッシュタグの追加</h3>
+                    <input type="text" name="hashtag[name]" placeholder="#〇〇〇"/>
+                    <p>＃をつけて検索してください</p>
+                    <input type="submit" value="登録(store)"/>
+            </form>
         </div>
         <a href='/musics/{{ $music->id }}/review'>レビュー投稿 (Review)</a>
         <div class='posts'>

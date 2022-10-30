@@ -21,4 +21,6 @@ class Tag extends Model
         return $this->belongsToMany(Music::class);
 
     }
+    
+    
 }

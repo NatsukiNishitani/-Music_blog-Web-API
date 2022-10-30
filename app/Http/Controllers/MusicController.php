@@ -46,9 +46,28 @@ class MusicController extends Controller
     }
     
     
-    public function show(Music $music, Post $post, Reply $reply, Tag $tag){
+    public function show(Request $request, Music $music, Post $post, Reply $reply, Tag $tag){
         return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5),'reply' => $reply, 'tags' => $tag]);
         
+        //＄変数の格納
+        $input_hashtag = $request['hashtag'];
+        //曲の保存
+        $input_music = $request['music'];
+        $music->fill($input_music)->save();
+        //ハッシュタグ複数登録
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $input_hashtag["name"], $match);
+        foreach($match[1] as $input){
+            //タグが被らないように保存
+            $hashtag = Tag::firstOrCreate([
+                'name' => $input
+                ]);
+                
+            //中間テーブルの紐づけ
+            $music->tags()->attach($hashtag->id);
+        };
+        
+
+        return redirect('/musics/'.$music->id);
     }
     
     
