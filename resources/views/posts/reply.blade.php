@@ -49,7 +49,9 @@
                     </p>
                 @endforeach
             </div>
-            
+            <div class='paginate'>
+                {{ $replies->links() }}
+            </div>
         <div class="footer">
             <a href="/musics/{{ $music->id }}">戻る (back)</a>
         </div>

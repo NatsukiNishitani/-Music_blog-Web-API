@@ -11,7 +11,7 @@ use App\Models\Review;
 class ReplyController extends Controller
 {
     public function reply(Music $music, Post $post, Reply $reply){
-        return view('posts/reply')->with(['music' => $music,'post' => $post, 'replies' => $reply->get()]);
+        return view('posts/reply')->with(['music' => $music,'post' => $post, 'replies' => $reply->getPaginateByLimit()]);
     }
     
     public function show_reply(Music $music, Reply $reply){
@@ -26,6 +26,7 @@ class ReplyController extends Controller
         $reply->fill($input)->save();
         return redirect('/musics/'.$music->id.'/'.$post->id);
     }
+    
     
 
 }
