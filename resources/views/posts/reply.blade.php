@@ -43,7 +43,7 @@
                         <form action="/musics/{{ $post->id }}/{{ $music->id }}/{{ $reply->id }}" id="form_{{ $reply->id }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="button" onclick="deletePost({{ $reply->id }})">delete</button>
+                            <button type="button" onclick="deletePost({{ $reply->id }})">削除 delete</button>
                         </form>
                     @endif
                     </p>
