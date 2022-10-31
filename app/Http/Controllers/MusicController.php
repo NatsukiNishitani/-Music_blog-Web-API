@@ -6,6 +6,7 @@ use App\Models\Music;
 use App\Models\Post;
 use App\Models\Reply;
 use App\Models\Tag;
+use App\Http\Requests\MusicRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -21,7 +22,7 @@ class MusicController extends Controller
     
     
     
-    public function store(Request $request, Music $music)
+    public function store( Music $music, MusicRequest $request)
     {
         //＄変数の格納
         $input_hashtag = $request['hashtag'];

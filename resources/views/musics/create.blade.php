@@ -13,14 +13,15 @@
                 <div class='music'>
                     <h1>曲投稿（music upload）</h1>
                         <h2 class='Song title'>曲名（song title）</h2>
-                            <input type="text" name="music[song_title]" placeholder="songs"/>
+                            <input type="text" name="music[song_title]" placeholder="songs" value="{{ old('music.song_title') }}"/>
                             <p class="song_title_error" style="color:red">{{ $errors->first('music.song_title') }}</p>
                         <h2 class='singer'>歌手(singer)</h2>
-                            <input type="text" name="music[singer]" placeholder="singers"/>
+                            <input type="text" name="music[singer]" placeholder="singers" value="{{ old('music.singer') }}"/>
                             <p class="singer_error" style="color:red">{{ $errors->first('music.singer') }}</p>
                         <P class='hashtags'>#ハッシュタグ(tag)</p>  
-                        <input type="text" name="hashtag[name]" placeholder="#〇〇〇"/>
-                        <p>ハッシュタグ＃をつけて検索してください</p>
+                        <input type="text" name="hashtag[name]" placeholder="#〇〇〇" value="{{ old('hashtag.name') }}"/>
+                        <p class="tag_error" style="color:red">{{ $errors->first('hashtag.name') }}</p>
+                        <p>ハッシュタグ＃をつけて検索してください</p> 
                 </div>
                 <input type="submit" value="登録(store)"/>
             </form>
