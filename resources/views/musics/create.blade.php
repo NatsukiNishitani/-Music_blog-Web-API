@@ -25,7 +25,7 @@
                 </div>
                 <input type="submit" value="登録(store)"/>
             </form>
-            <div class="back">[<a href="/">back</a>]</div>
+            <div class="back">[<a href="/search">back</a>]</div>
             </div>
         </div>
     </body>
