@@ -52,6 +52,7 @@
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
+            <a href='/register'>新規登録 (register)</a>
         </form>
     </x-auth-card>
 </x-guest-layout>
