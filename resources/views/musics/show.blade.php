@@ -7,10 +7,11 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="/css/show.css"> 
+        <link rel="stylesheet" href={{asset("css/show.css") }}> 
     </head>
     <body>
-        <h1>曲レビュー (Music Review)</h1>
+        <x-app-layout>
+        <h1 class="bg-red-200 text-green-700">曲レビュー (Music Review)</h1>
         <div class='music'>
             <div class='song'>
             <h2 class="song">曲名 (song) : {{ $music->song_title }}</h2>
@@ -81,5 +82,6 @@
                 }
             }
         </script>
+        </x-app-layout>
     </body>
 </html>

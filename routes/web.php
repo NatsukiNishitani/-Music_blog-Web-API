@@ -17,6 +17,13 @@ use App\Http\Controllers\FavoriteController;
 |
 */
 
+Route::group(['middleware' => ['auth']], function(){
+    
+
+Route::get('/', function () {
+    return redirect('/search');
+});
+
 Route::get('/search', [MusicController::class, 'search']);   //曲検索画面、検索結果表示
 Route::get('/musics/create', [MusicController::class, 'create']);   //新規曲登録入力画面
 Route::post('/musics', [MusicController::class, 'store']);      //新規曲登録保存
@@ -25,7 +32,6 @@ Route::get('/musics/{music}/edit', [PostController::class, 'edit']);
 Route::put('/musics/{post}', [PostController::class, 'update']);      //曲レビュー編集更新ページ
 Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧,いいね機能、五段階評価記載されてる
 Route::post('/musics/tag/{music}', [MusicController::class, 'add_hashtag']);
-
 Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集アップデート
 Route::get('/musics/{music}/{post}', [ReplyController::class, 'reply']);  //show.bladeに対して返信機能
 Route::get('/replies/{music}/{reply}', [ReplyController::class, 'show_reply']);
@@ -36,6 +42,7 @@ Route::post('/bad/{music}/{post}', [FavoriteController::class, 'post_destroy']);
 Route::post('/like/{music}/{reply}/', [FavoriteController::class, 'reply_store']);
 Route::post('/unlike/{music}/{reply}/', [FavoriteController::class, 'reply_destroy']);
 Route::delete('/reply/{post}/{reply}', [ReplyController::class, 'delete']);
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
