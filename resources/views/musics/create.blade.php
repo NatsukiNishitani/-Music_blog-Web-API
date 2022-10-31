@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>Music</title>
+        <title>Music　Search</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
@@ -19,7 +19,8 @@
                             <input type="text" name="music[singer]" placeholder="singers"/>
                             <p class="singer_error" style="color:red">{{ $errors->first('music.singer') }}</p>
                         <P class='hashtags'>#ハッシュタグ(tag)</p>  
-                        <input type="text" name="hashtag[name]" placeholder="hashtags"/>
+                        <input type="text" name="hashtag[name]" placeholder="#〇〇〇"/>
+                        <p>ハッシュタグ＃をつけて検索してください</p>
                 </div>
                 <input type="submit" value="登録(store)"/>
             </form>

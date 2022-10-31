@@ -7,26 +7,37 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="/css/show.css"> 
     </head>
     <body>
         <h1>曲レビュー (Music Review)</h1>
-        <div class='song'>
-        <h2 class="song">曲名 (song) : {{ $music->song_title }}</h2>
-        </div>
-        <div class='singer'>
-        <h3>歌手 (singer) : {{ $music->singer }} </h3>
-        </div>
-        <div class'tags'>
-            @foreach ($music->tags as $tag)
-            <p>#{{ $tag->name }}</p>
-            @endforeach
+        <div class='music'>
+            <div class='song'>
+            <h2 class="song">曲名 (song) : {{ $music->song_title }}</h2>
+            </div>
+            <div class='singer'>
+            <h3>歌手 (singer) : {{ $music->singer }} </h3>
+            <p>{{ $music->created_at->diffForHumans() }}</p>
+            </div>
+            <div class='tags'>
+                @foreach ($music->tags as $tag)
+                <p>{{ $tag->name }}</p>
+                @endforeach
+                <form action="/musics/tag/{{ $music->id }}" method="POST">
+                    <h3 class = "add hashtags">ハッシュタグの追加</h3>
+                        @csrf
+                        <input type="text" name="hashtag[name]" placeholder="#〇〇〇"/>
+                        <p>＃をつけて検索してください</p>
+                        <input type="submit" value="登録(store)"/>
+                </form>
+            </div>
         </div>
         <a href='/musics/{{ $music->id }}/review'>レビュー投稿 (Review)</a>
         <div class='posts'>
             <h2>投稿一覧 (Review)</h2>
             @foreach ($posts as $post)
             <p class='post_who'>{{ Auth::user()->name }}</p>
-            <p class='post'>{{ $post->review }}</p>
+            <p class='post'>{{ $post->review }} <p>{{ $music->created_at->diffForHumans() }}</p></p>
                 @if($post->users()->where('user_id', Auth::id())->exists())
                     <div class="col-md-3">
                         <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
@@ -59,7 +70,7 @@
         </div>
         <div class='paginate'>{{ $posts->links() }}</div>
         <div class="footer">
-            <a href="/search">戻る (back)</a>
+            <a href="/search">検索画面へ (search)</a>
         </div>
         <script>
             function deletePost(id) {
@@ -70,6 +81,5 @@
                 }
             }
         </script>
-        
     </body>
 </html>

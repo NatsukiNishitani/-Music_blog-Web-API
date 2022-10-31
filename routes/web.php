@@ -24,6 +24,8 @@ Route::get('/musics/{music}/review', [PostController::class, 'review']);   //曲
 Route::get('/musics/{music}/edit', [PostController::class, 'edit']);
 Route::put('/musics/{post}', [PostController::class, 'update']);      //曲レビュー編集更新ページ
 Route::get('/musics/{music}', [MusicController::class, 'show']);    //曲詳細・レビュー一覧,いいね機能、五段階評価記載されてる
+Route::post('/musics/tag/{music}', [MusicController::class, 'add_hashtag']);
+
 Route::post('/musics/{music}', [PostController::class, 'store']);   //曲編集アップデート
 Route::get('/musics/{music}/{post}', [ReplyController::class, 'reply']);  //show.bladeに対して返信機能
 Route::get('/replies/{music}/{reply}', [ReplyController::class, 'show_reply']);
@@ -33,7 +35,7 @@ Route::post('/good/{music}/{post}', [FavoriteController::class, 'post_store']);
 Route::post('/bad/{music}/{post}', [FavoriteController::class, 'post_destroy']);
 Route::post('/like/{music}/{reply}/', [FavoriteController::class, 'reply_store']);
 Route::post('/unlike/{music}/{reply}/', [FavoriteController::class, 'reply_destroy']);
-//Route::delete('', [ReplyController::class, 'delete']);
+Route::delete('/reply/{post}/{reply}', [ReplyController::class, 'delete']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

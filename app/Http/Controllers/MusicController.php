@@ -33,7 +33,7 @@ class MusicController extends Controller
         foreach($match[1] as $input){
             //タグが被らないように保存
             $hashtag = Tag::firstOrCreate([
-                'name' => $input
+                'name' =>"#". $input
                 ]);
                 
             //中間テーブルの紐づけ
@@ -45,10 +45,34 @@ class MusicController extends Controller
         
     }
     
+    public function add_hashtag(Request $request, Music $music)
+    {
+        $hashtag = $request['hashtag'];
+        //ハッシュタグ複数登録
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $hashtag["name"], $match);
+        foreach($match[1] as $input){
+            //タグが被らないように保存
+            $hashtag = Tag::firstOrCreate([
+                'name' =>"#". $input
+                ]);
+                
+            //中間テーブルの紐づけ
+            $music->tags()->attach($hashtag->id);
+        };
+        
+
+        return redirect('/musics/'.$music->id);
+    }
     
-    public function show(Music $music, Post $post, Reply $reply, Tag $tag){
+    
+    public function show(Request $request, Music $music, Post $post, Reply $reply, Tag $tag){
+        
         return view('musics/show')->with(['music' => $music, 'posts' => $post->paginate(5),'reply' => $reply, 'tags' => $tag]);
         
+        
+        
+
+     
     }
     
     

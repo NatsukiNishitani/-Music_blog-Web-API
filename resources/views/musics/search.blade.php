@@ -13,7 +13,6 @@
                 <input type="search" name="search">
                 <input type="submit" value="検索(search)"/>
             </form>
-            <div class="back">[<a href="/">back</a>]</div>
             </div>
         </div>
         
@@ -22,6 +21,7 @@
             @foreach($musics as $music)
             <a href='/musics/{{ $music->id }}'><h2>曲：{{ $music->song_title }}</h2></a>
             <p>歌手：{{ $music->singer }}</p>
+            <p>{{ $music->created_at->diffForHumans() }}</p>
             @endforeach
             @else
             <p>曲が見つかりませんでした</p>
