@@ -27,10 +27,10 @@ class ReplyController extends Controller
         return redirect('/musics/'.$music->id.'/'.$post->id);
     }
     
-    public function delete(Music $music, Post $post)
+    public function delete(Post $post, Reply $reply)
     {
         $reply->delete();
-        return redirect('/musics/'.$music->id.$post->id);
+        return redirect('/musics/'.$post->music_id.'/'.$post->id);
     }
     
     

@@ -41,7 +41,7 @@
                         <p>いいね数：{{ $reply->users()->count() }}</p>
                     </div>
                     @if(auth()->id() == $reply->user_id)
-                        <form action="/musics/{{ $post->id }}/" id="form_{{ $reply->id }}" method="post">
+                        <form action="/reply/{{ $post->id }}/{{ $reply->id }}" id="form_{{ $reply->id }}" method="post">
                             <p class="edit">[<a href="/musics/{{ $post->id }}/edit">編集 (edit)</a>]</p>
                             @csrf
                             @method('DELETE')
