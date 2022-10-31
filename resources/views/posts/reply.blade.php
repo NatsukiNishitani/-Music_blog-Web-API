@@ -21,7 +21,7 @@
         </form>
             <div class='reply_detail_index'>
                 @foreach($replies as $reply)
-                <a href="" class='reply'>{{ $reply->comment }}
+                <p class="replies">{{ $reply->comment }}<p>{{ $music->created_at->diffForHumans() }}</p></p>
                     @if($reply->users()->where('user_id', Auth::id())->exists())
                         <div class="col-md-3">
                             <form action="/unlike/{{ $music->id }}/{{ $reply->id }}/" method="POST">

@@ -37,8 +37,7 @@
             <h2>投稿一覧 (Review)</h2>
             @foreach ($posts as $post)
             <p class='post_who'>{{ Auth::user()->name }}</p>
-            <p class='post'>{{ $post->review }}</p>
-            <p></p>
+            <p class='post'>{{ $post->review }} <p>{{ $music->created_at->diffForHumans() }}</p></p>
                 @if($post->users()->where('user_id', Auth::id())->exists())
                     <div class="col-md-3">
                         <form action="/bad/{{ $music->id }}/{{ $post->id }}" method="POST">
@@ -71,7 +70,7 @@
         </div>
         <div class='paginate'>{{ $posts->links() }}</div>
         <div class="footer">
-            <a href="/search">戻る (back)</a>
+            <a href="/search">検索画面へ (search)</a>
         </div>
         <script>
             function deletePost(id) {
@@ -82,6 +81,5 @@
                 }
             }
         </script>
-        
     </body>
 </html>
