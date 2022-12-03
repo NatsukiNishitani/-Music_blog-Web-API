@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReplyRequest;
 use App\Models\Post;
 use App\Models\Reply;
 use App\Models\Music;
@@ -18,7 +19,7 @@ class ReplyController extends Controller
         return view('posts/reply')->with(['music' => $music,'main' => $reply, 'replies' => $reply->get()]);
     }   
     
-    public function store(Request $request,Music $music,Post $post)
+    public function store(ReplyRequest $request,Music $music,Post $post)
     {   
 
         $reply = new Reply;

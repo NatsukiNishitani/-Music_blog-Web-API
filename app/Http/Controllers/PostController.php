@@ -24,7 +24,7 @@ class PostController extends Controller
     
     
     
-    public function store(Request $request, Music $music)
+    public function store(PostRequest $request, Music $music)
     {
         
         $post = new Post;

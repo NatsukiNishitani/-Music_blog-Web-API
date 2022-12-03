@@ -10,7 +10,8 @@
             @csrf
             <div class="review">
                 <h2>感想 Review</h2>
-                <textarea name="post[review]" placeholder="曲の感想・評価・詳細情報"></textarea>
+                <textarea name="post[review]" placeholder="曲の感想・評価・詳細情報">{{ old('post.review') }}</textarea>
+                <p class="review__error" style="color:red">{{ $errors->first('post.review') }}</p>
             </div>
             <input type="submit" value="store"/>
         </form>

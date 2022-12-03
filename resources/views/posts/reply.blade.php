@@ -13,7 +13,8 @@
             @csrf
             <div class="reply">
                 <h2>コメント Reply</h2>
-                <textarea name="reply[comment]" placeholder="コメント，返事"></textarea>
+                <textarea name="reply[comment]" placeholder="コメント，返事">{{ old('reply.comment') }}</textarea>
+                <p class="comment__error" style="color:red">{{ $errors->first('reply.comment') }}</p>
             </div>
             <input type="hidden" name="reply[post_id]" value={{ $post->id }} readonly></input>
             <input type="hidden" name="reply[user_id]" value={{ Auth::user()->id }} readonly></input>
@@ -21,7 +22,9 @@
         </form>
             <div class='reply_detail_index'>
                 @foreach($replies as $reply)
-                <p class="replies">{{ $reply->comment }}<p>{{ $music->created_at->diffForHumans() }}</p></p>
+                <p class="replies">{{ $reply->comment }}
+                    <p>{{ $music->created_at->diffForHumans() }}</p>
+                </p>
                     @if($reply->users()->where('user_id', Auth::id())->exists())
                         <div class="col-md-3">
                             <form action="/unlike/{{ $music->id }}/{{ $reply->id }}/" method="POST">
